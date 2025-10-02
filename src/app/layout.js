@@ -4,7 +4,8 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import Loader from "@/components/Loader";
-import { SpeedInsights } from "@vercel/speed-insights/next"; // ✅ 1. IMPORT SPEED INSIGHTS
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"; // ✅ 1. Import Analytics
 import "./globals.css";
 import { Playfair_Display, Inter } from 'next/font/google';
 
@@ -20,31 +21,7 @@ const inter = Inter({
   display: 'swap',
 });
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Himalyan Trails",
-  "url": "https://himalyantrails.com",
-  "logo": "https://himalyantrails.com/logo.png",
-  "telephone": "+919913982835",
-  "email": "ssemwal116@gmail.com",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Village Ontar",
-    "addressLocality": "Uttarkashi",
-    "addressRegion": "Uttarakhand",
-    "addressCountry": "IN"
-  },
-  "openingHours": "Mo-Su 09:00-19:00",
-  "priceRange": "$$",
-  "sameAs": [
-    "https://facebook.com/your-page",
-    "https://instagram.com/your-page",
-    "https://twitter.com/your-page"
-  ],
-  "image": "https://himalyantrails.com/images/og-homepage.jpg",
-  "description": "Premium Himalayan trekking experiences in Uttarakhand, specializing in routes like Nag Tibba and Gangotri."
-};
+const jsonLd = { /* ... your global business data ... */ };
 
 export default function RootLayout({ children }) {
   const [loading, setLoading] = useState(true);
@@ -83,13 +60,14 @@ export default function RootLayout({ children }) {
               loop
               playsInline
             />
-            <div className="fixed top-0 left-0 w-full h-full bg-black/ ৫০ z-10" />
+            <div className="fixed top-0 left-0 w-full h-full bg-black/50 z-10" />
             <div className="relative z-20">
               {children}
             </div>
           </>
         )}
-        <SpeedInsights /> {/* ✅ 2. ADD THE COMPONENT HERE */}
+        <SpeedInsights />
+        <Analytics /> {/* ✅ 2. Add the component here */}
       </body>
     </html>
   );
